@@ -6,7 +6,7 @@
 					name:'intro',
 					params:{
 						type:'tween',
-						options:{duration:1500,
+						options:{	duration:1500,
 									transition: new Fx.Transition(Fx.Transitions.Expo.easeOut,2),
 									onComplete:function(e){
 										sLabFx.chain($('left-item'),'intro-one');
@@ -21,7 +21,7 @@
 					name:'click',
 					params:{
 						type: 'tween',
-						options:{ duration: 125, link:'cancel',
+						options:{ 	duration: 125, link:'cancel',
 									transition: new Fx.Transition(Fx.Transitions.Expo.easeOut,2),
 									onComplete:function(e){
 										sLabFx.chain($('left-item'),'click-hide');
@@ -48,7 +48,7 @@
 					name:'intro-one',
 					params:{
 						type:'tween',
-						options:{duration:515,
+						options:{	duration:515,
 									transition: new Fx.Transition(Fx.Transitions.Expo.easeOut,2),
 									onComplete: function(e){
 									}
