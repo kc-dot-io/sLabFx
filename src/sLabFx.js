@@ -119,7 +119,7 @@
 		handler:function(i){
 			this.fx.each(function(fx){
 					switch(fx){
-						case 'click': case 'mouseover': case 'mouseleave':
+						case 'click': case 'mouseover': case 'mouseleave': case 'mouseout':
 							this.element.addEvent(fx,function(){
 								this.os.sLFx.fire(i,fx);
 							}.bind(this));
