@@ -50,7 +50,7 @@
 						 
 					 }.bind(this)
 				}).send({});
-		 }
+			}
 		},
 		chain:function(e,fx){
 			if(this.sLFx){
@@ -75,34 +75,7 @@
 			return _index;
 		}
 	});		
-
-
-	var sLRegister=new Class({
-		Implements:[Options,Events],
-		options:{ },
-		initialize:function(options,os){
-			this.os = os;
-			this.setOptions(options);
-			this.handler();
-		},
-		handler:function(){
-			this.options.fx.each(function(opt,i){
-				var opts = [];
-				opt.each(function(_opt,j){
-
-						_opt.fx.each(function(__opt,k){
-								opts[k]=__opt[0].name;
-						}.bind(this));
-
-						this.os.register($(_opt.id),opts);
-						if(this.os.options.init) this.os.sLFx.load(i);
-						if(this.os.options.init) this.os.sLEvents.attach(i);                        
-
-				}.bind(this));
-			}.bind(this));
-		}			
-	});		
-
+	
 	var sLEvents=new Class({
 		Implements:[Options,Events],
 		options:{ },
@@ -132,7 +105,33 @@
 			}.bind(this));
 			return;
 		}
-	});		
+	});
+
+	var sLRegister=new Class({
+		Implements:[Options,Events],
+		options:{ },
+		initialize:function(options,os){
+			this.os = os;
+			this.setOptions(options);
+			this.handler();
+		},
+		handler:function(){
+			this.options.fx.each(function(opt,i){
+				var opts = [];
+				opt.each(function(_opt,j){
+
+						_opt.fx.each(function(__opt,k){
+								opts[k]=__opt[0].name;
+						}.bind(this));
+
+						this.os.register($(_opt.id),opts);
+						if(this.os.options.init) this.os.sLFx.load(i);
+						if(this.os.options.init) this.os.sLEvents.attach(i);                        
+
+				}.bind(this));
+			}.bind(this));
+		}			
+	});				
 
 	var sLFx=new Class({
 		Implements:[Options,Events],
