@@ -91,17 +91,17 @@
     },
     handler:function(i){
       this.fx.each(function(fx){
-          switch(fx){
-            case 'click': case 'mouseover': case 'mouseleave': case 'mouseout':
-              this.element.addEvent(fx,function(){
-                this.os.sLFx.fire(i,fx);
-              }.bind(this));
-            break;	
-            case 'intro':
-              if(this.os.options.init) this.os.sLFx.fire(i,fx);                            
-            break;
-            default: return; break;
-          }
+        switch(fx){
+          case 'click': case 'mouseover': case 'mouseleave': case 'mouseout':
+            this.element.addEvent(fx,function(){
+              this.os.sLFx.fire(i,fx);
+            }.bind(this));
+          break;	
+          case 'intro':
+            if(this.os.options.init) this.os.sLFx.fire(i,fx);                            
+          break;
+          default: return; break;
+        }
       }.bind(this));
       return;
     }
@@ -120,13 +120,13 @@
         var opts = [];
         opt.each(function(_opt,j){
 
-            _opt.fx.each(function(__opt,k){
-                opts[k]=__opt[0].name;
-            }.bind(this));
+          _opt.fx.each(function(__opt,k){
+              opts[k]=__opt[0].name;
+          }.bind(this));
 
-            this.os.register($(_opt.id),opts);
-            if(this.os.options.init) this.os.sLFx.load(i);
-            if(this.os.options.init) this.os.sLEvents.attach(i);                        
+          this.os.register($(_opt.id),opts);
+          if(this.os.options.init) this.os.sLFx.load(i);
+          if(this.os.options.init) this.os.sLEvents.attach(i);                        
 
         }.bind(this));
       }.bind(this));
@@ -179,11 +179,11 @@
     },
     fire:function(i,fx){// Need to add deep level chaining (arg3)				
       this.options.fx[i].each(function(_fx){
-         _fx.fx.each(function(__fx){           
-             var o = __fx[0].params; 
-             if(fx == __fx[0].name) this._fx[i][fx].attempt([o.type,o.options,o.args],this)
-             }.bind(this));
+       _fx.fx.each(function(__fx){           
+         var o = __fx[0].params; 
+         if(fx == __fx[0].name) this._fx[i][fx].attempt([o.type,o.options,o.args],this)
          }.bind(this));
+       }.bind(this));
     }
   });
 
