@@ -69,6 +69,11 @@
         opacity:0;
       }
 
+      #mousewheel{
+        opacity: 0;
+        position: relative;
+        width: 100px;
+      }
 
     </style>
   </head>
@@ -89,22 +94,31 @@ Examples:
   <div id='wrapper'>
     <div id='inner-wrapper'>
         <div id='text-item' class="sLAbFx">
-        <p>Palm's world-class ease of use, now on Windows Mobile&reg;</p>
+          
+          <p>Palm's world-class ease of use, now on Windows Mobile&reg;</p>
 
-<p>The Palm&reg; Treo&#153; 700wx smartphones deliver everything you need without compromise. They combine a smarter phone with broadband-like speeds, wireless email, including Windows Mobile&reg; Direct Push Technology,and rich-media capabilities, all in one bringing Palm's world-class ease of use to the Windows Mobile platform.</p>
-
-<p>Connect with people in multiple ways by voice, email or SMS. Your contacts are always reachable, from any application. Access email, the web and corporate networks on one of the fastest networks available in the U.S. Or relax and play your favourite music and videos right on your device. With these easy-to-use productivity devices in hand, you can stay connected3 on your terms.</p>
+          <p>The Palm&reg; Treo&#153; 700wx smartphones deliver everything you need without compromise. They combine a smarter phone with broadband-like speeds, wireless email, 
+            including Windows Mobile&reg; Direct Push Technology,and rich-media capabilities, all in one bringing Palm's world-class ease of use to the Windows Mobile platform.</p>
+          
+          <p>Connect with people in multiple ways by voice, email or SMS. Your contacts are always reachable, from any application. Access email, the web and corporate networks 
+            on one of the fastest networks available in the U.S. Or relax and play your favourite music and videos right on your device. With these easy-to-use productivity 
+            devices in hand, you can stay connected3 on your terms.</p>
 
         </div>
         <div id='left-item' class="sLAbFx">
 
-                </div>
-                <div id='right-item' class="sLAbFx">
+        </div>
+        <div id='right-item' class="sLAbFx">
 
-                </div>	
+        </div>	
     </div>
   </div>
 
+<div id='mousewheel'>
+  
+  Mousewheel
+  
+</div>
 
 <br/><br/><br/>
 <hr width='100%'>
@@ -114,7 +128,10 @@ The images, names, and trademarks shown here in examples are in all ways propert
 They are used simply to illustrate a concept and if there are any issues with their use please contact me at <a href=' http://slajax.com'>http://slajax.com</a> before sending your high priced lawyers after me.
 
 <script type='text/javascript'>
-  new sLAbFx();
+window.addEvent('load',function(){
+  new sLAbFx({config: 'mousewheel.js'});
+  new sLAbFx({config: 'animations.js'});  
+});
 </script>
 </body>
 </html>

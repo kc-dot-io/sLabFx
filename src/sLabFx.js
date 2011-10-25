@@ -1,7 +1,7 @@
   var sLabFx;
   var sL = {options:false};
 
-  var sLAbFx=new Class({
+  var sLAbFx = new Class({
     Implements:[Options,Events],
     options:{
       config:'animations.js',
@@ -13,7 +13,7 @@
       this.prepare();                
     },
     handler:function(){
-      this.sLFx = new sLFx(this.options,this);	
+      this.sLFx = new sLFx(this.options,this);
       this.sLEvents = new sLEvents(this.options,this);
       this.sLRegister = new sLRegister(this.options,this);
 
@@ -76,7 +76,7 @@
     }
   });		
   
-  var sLEvents=new Class({
+  var sLEvents = new Class({
     Implements:[Options,Events],
     options:{ },
     initialize:function(options,os){
@@ -89,25 +89,24 @@
       this.fx = this.os.getFx(i);
       this.handler(i);
     },
-    handler:function(i){
+    handler:function(i){      
       this.fx.each(function(fx){
         switch(fx){
-          case 'click': case 'mouseover': case 'mouseleave': case 'mouseout':
+          case 'click': case 'mouseover': case 'mouseleave': case 'mouseout': case 'mousewheel':
             this.element.addEvent(fx,function(){
               this.os.sLFx.fire(i,fx);
             }.bind(this));
           break;	
-          case 'intro':
-            if(this.os.options.init) this.os.sLFx.fire(i,fx);                            
-          break;
-          default: return; break;
+          default:
+            if(this.os.options.init) this.os.sLFx.fire(i,fx);
+          break;          
         }
       }.bind(this));
       return;
     }
   });
 
-  var sLRegister=new Class({
+  var sLRegister = new Class({
     Implements:[Options,Events],
     options:{ },
     initialize:function(options,os){
@@ -126,14 +125,14 @@
 
           this.os.register($(_opt.id),opts);
           if(this.os.options.init) this.os.sLFx.load(i);
-          if(this.os.options.init) this.os.sLEvents.attach(i);                        
+          if(this.os.options.init) this.os.sLEvents.attach(i);
 
         }.bind(this));
       }.bind(this));
     }			
   });				
 
-  var sLFx=new Class({
+  var sLFx = new Class({
     Implements:[Options,Events],
     options:{ },
     initialize:function(options,os){
@@ -143,7 +142,7 @@
     },
     load:function(i){
       var el = this.os.getElements(i);
-      var fx = this.os.getFx(i);			
+      var fx = this.os.getFx(i);
       this.handler(i,el,fx);
     },
     prepare:function(){
@@ -154,8 +153,8 @@
       this.options.fx.each(function(_fx){			
         if(el.id == _fx[0].id){				
           this._fx[i]=[];					
-          fx.each(function(__fx){                             					
-            this._fx[i][__fx]=function(type,options,args){					
+          fx.each(function(__fx){                             
+            this._fx[i][__fx]=function(type,options,args){
               switch(type){
                 case 'morph':
                 
@@ -170,14 +169,17 @@
                   }.bind(this));
                   
                 break;
-                default: return;	break;
+                
+                default: 
+                  return;  
+                break;
               }
             }.bind(this);
           }.bind(this))
         } 
       }.bind(this));
     },
-    fire:function(i,fx){// Need to add deep level chaining (arg3)				
+    fire:function(i,fx){// Need to add deep level chaining (arg3)
       this.options.fx[i].each(function(_fx){
        _fx.fx.each(function(__fx){           
          var o = __fx[0].params; 

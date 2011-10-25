@@ -2917,9 +2917,9 @@ var Fx = new Class({
 		if (!this.check(arguments.callee, from, to)) return this;
 		this.from = from;
 		this.to = to;
-		this.time = 0;
-		this.startTimer();
+		this.time = 0;		
 		this.onStart();
+		this.startTimer();
 		return this;
 	},
 
