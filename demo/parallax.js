@@ -44,8 +44,7 @@
             args['top'] = [offset.y];
             args['left'] =  [offset.y];  
              
-            return [ type, options, args, alt_target, evt ];
-            
+            return [ type, options, args, alt_target, evt ];            
           },
           params:{
             type:'tween',
@@ -67,8 +66,7 @@
             args['top'] = [offset.y];
             args['right'] =  [offset.y];                        
             
-            return [ type, options, args, alt_target, evt ];
-            
+            return [ type, options, args, alt_target, evt ];            
           },
           params:{
             type:'tween',
