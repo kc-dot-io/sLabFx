@@ -196,9 +196,8 @@
               __fx[0].intercept = function(t,o,a,at,e){ return [t,o,a,at]; }
             }                                    
             
-            this._fx[i][fx].attempt( 
-              __fx[0].intercept.attempt( [p.type,p.options,p.args,f.alt_target,e], this.os )
-            ,this);
+            var args = __fx[0].intercept.attempt( [p.type,p.options,p.args,f.alt_target,e], this.os )
+            if( args !== false ) this._fx[i][fx].attempt( args ,this);
             
           }
           
