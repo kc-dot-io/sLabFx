@@ -172,7 +172,9 @@
                   }.bind(this));
                   
                 break;
-                
+                case 'css':
+                  if( $(el) ) $(el).setStyles(args);
+                break;                
                 default: 
                   return;  
                 break;
