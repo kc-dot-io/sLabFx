@@ -71,6 +71,7 @@
     [{ 	
       element:'left-item',
       fx:[
+        /* */
         [{
           name:'load-one',
           params:{
@@ -87,6 +88,7 @@
             }
           }
         }],
+        /* */
         [{
           name:'click',
           params:{
@@ -98,8 +100,7 @@
                 sLabFx.chain($('right-item'),'click');
               },
               onComplete: function(e){
-                sLabFx.chain($('text-item'),'load-one');
-                  
+                sLabFx.chain($('text-item'),'load-one');                  
               }
             },
             args:{ 

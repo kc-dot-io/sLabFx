@@ -3,7 +3,8 @@
     Implements:[Options,Events],
     options:{
       config:'animations.js',
-      init: true
+      init: true,
+      fx: false
     },
     initialize: function(options){
       this.setOptions(options);
@@ -45,7 +46,7 @@
             this.handler();
              
           }.bind(this)
-        }).send({});
+        }).get();
         
       }
     },
@@ -86,12 +87,13 @@
       this.fx = this.os.getFx(i);
       this.handler(i);
     },
-    handler: function(i){                
+    handler: function(i){   
+                   
       this.fx.each(function(fx){        
         switch(fx){
-          case 'click': case 'mouseover': case 'mouseleave': case 'mouseout': case 'mousewheel':
-            this.element.addEvent(fx,function(e){              
-              e.preventDefault();
+          case 'click': case 'mouseover': case 'mouseleave': case 'mouseout': case 'mousewheel': case 'scroll':
+            
+            $(this.element).addEvent(fx,function(e){                                          
               this.os.sLFx.fire(i,fx,e);
             }.bind(this));
           break;	
@@ -149,21 +151,24 @@
     },
     handler: function(i,el,fx){
       this.options.fx.each(function(_fx){			
-        if(el.id == _fx[0].element){				
+        if($(el) == $(_fx[0].element)){				
           this._fx[i]=[];					
           fx.each(function(__fx){                             
-            this._fx[i][__fx]=function(type,options,args){              
+            this._fx[i][__fx]=function(type,options,args,alt_target,evt){     
+                       
+              if( typeof alt_target != 'undefined' ) el = $(alt_target);
+              
               switch(type){
                 case 'morph':
                 
-                  if( $(el) )  new Fx.Morph(el,options).start(args);
+                  if( $(el) ) new Fx.Morph($(el),options).start(args);
                   
                 break;
                 case 'tween':
                   
                   var hash = new Hash(args);
                   hash.each(function(v,k){ 
-                    if( $(el) ) new Fx.Tween(el,options).start(k,v[0],v[1]);
+                    if( $(el) ) new Fx.Tween($(el),options).start(k,v[0],v[1]);
                   }.bind(this));
                   
                 break;
@@ -180,16 +185,21 @@
     fire: function(i,fx,e){// Need to add deep level chaining (arg3)
       this.options.fx[i].each(function(_fx){
         _fx.fx.each(function(__fx){           
-          var o = __fx[0].params; 
+          var f = __fx[0];           
+          var p = f.params;           
          
-          if(fx == __fx[0].name) 
-          {
-            if ( typeof __fx[0].intercept !== 'function')
-            {
-              __fx[0].intercept = function(t,o,a,e){ return [t,o,a]; }
-            }
+          if(fx == __fx[0].name) {
             
-            this._fx[i][fx].attempt( __fx[0].intercept(o.type,o.options,o.args,e),this );
+            if ( typeof __fx[0].intercept !== 'function'){
+              __fx[0].intercept = function(t,o,a,at,e){ return [t,o,a,at]; }
+            }            
+            
+            var target = ( typeof e == 'undefined' ) ? f.alt_target : e.target;
+            
+            this._fx[i][fx].attempt( 
+              __fx[0].intercept.attempt( [p.type,p.options,p.args,f.alt_target,e], target )
+            ,this);
+            
           }
           
         }.bind(this));
