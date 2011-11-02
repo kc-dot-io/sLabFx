@@ -50,14 +50,6 @@
         [{
           name:'scroll',       
           alt_target: 'container',   
-          intercept: function(type,options,args,alt_target,evt)
-          {         
-            var offset = $(window).getScroll();
-            
-            args['background-position'] = [ '0 -'+parseInt(offset.y % 50)+'px' ];            
-             
-            return [ type, options, args, alt_target, evt ];            
-          },
           params:{
             type:'morph',
             options:{
@@ -65,11 +57,27 @@
             },
             args:{
             }
-          }
+          },
+          intercept: function(type,options,args,alt_target,evt)
+          {         
+            var offset = $(window).getScroll();
+            
+            args['background-position'] = [ '0 -'+parseInt(offset.y % 50)+'px' ];            
+             
+            return [ type, options, args, alt_target, evt ];            
+          }          
         }],
         [{
           name:'scroll',       
-          alt_target: 'one',   
+          alt_target: 'one',
+          params:{
+            type:'morph',
+            options:{
+              duration: 250
+            },
+            args:{
+            }
+          },   
           intercept: function(type,options,args,alt_target,evt)
           {         
             var offset = $(window).getScroll();
@@ -78,19 +86,20 @@
             args['left'] =  [offset.y];  
              
             return [ type, options, args, alt_target, evt ];            
-          },
+          }
+        }],
+        [{
+          name:'scroll',       
+          alt_target: 'two',
           params:{
             type:'morph',
             options:{
               duration: 250
             },
             args:{
+              
             }
-          }
-        }],
-        [{
-          name:'scroll',       
-          alt_target: 'two',   
+          },   
           intercept: function(type,options,args,alt_target,evt)
           {                     
             var offset = $(document).getScroll();                        
@@ -99,7 +108,11 @@
             args['right'] =  [offset.y];                        
             
             return [ type, options, args, alt_target, evt ];            
-          },
+          }
+        }],
+        [{
+          name:'scroll',       
+          alt_target: 'three',
           params:{
             type:'morph',
             options:{
@@ -108,11 +121,7 @@
             args:{
               
             }
-          }
-        }],
-        [{
-          name:'scroll',       
-          alt_target: 'three',   
+          },   
           intercept: function(type,options,args,alt_target,evt)
           {                     
             var offset = $(document).getScroll();                        
@@ -121,15 +130,6 @@
             //args['right'] =  [offset.y];                        
             
             return [ type, options, args, alt_target, evt ];            
-          },
-          params:{
-            type:'morph',
-            options:{
-              duration: 250
-            },
-            args:{
-              
-            }
           }
         }]
       ]
