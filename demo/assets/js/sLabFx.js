@@ -194,12 +194,10 @@
             
             if ( typeof __fx[0].intercept !== 'function'){
               __fx[0].intercept = function(t,o,a,at,e){ return [t,o,a,at]; }
-            }            
-            
-            var target = ( typeof e == 'undefined' ) ? f.alt_target : e.target;
+            }                                    
             
             this._fx[i][fx].attempt( 
-              __fx[0].intercept.attempt( [p.type,p.options,p.args,f.alt_target,e], target )
+              __fx[0].intercept.attempt( [p.type,p.options,p.args,f.alt_target,e], this.os )
             ,this);
             
           }
