@@ -1,11 +1,11 @@
 { 
   fx:[    
     [{ 
-      element: 'container', // every element has a timeline, each element must have an id, ie: #container       
+      element: 'container', // Every element has a timeline and each element must have an id, ie: #container       
       fx:[
         [{
           name:'load', // This is the type of event as well as the name of the actual timeline event relative to that element
-          alt_target: 'one',
+          alt_target: 'one', // If alt_target isn't passed, then $('container') is animated, otherwise $(alt_target) is animated
           params:{
             type:'morph', // Choose between morph, tween, and css
             options:{
@@ -17,7 +17,7 @@
           }
         }],
         [{
-          name:'load',
+          name:'load', // Other events that can be used are mouseover, mouseout, click, scroll, mousescroll, basically any standard event as per mootools
           alt_target: 'two',
           params:{
             type:'morph',
@@ -45,7 +45,7 @@
       ]
     }],
     [{
-      element: window, // you can also bind directly to window, or document body if you like
+      element: window, // You can also bind directly to window, or document.body if you like
       fx:[
         [{
           
@@ -114,7 +114,7 @@
         }],
         [{
           name:'scroll',       
-          alt_target: 'container',   
+          alt_target: 'container',  
           params:{
             type:'morph',
             options:{
@@ -129,7 +129,7 @@
             
             if( offset.y > 1480 )
             {
-              this.chain(window,'hide'); // you could just as easily do $('container').setStyle('opacity',0); 
+              this.chain(window,'hide'); // You could just as easily do $('container').setStyle('opacity',0); 
               this.chain(window,'show-end'); // This is just here to illustrate how to chain animations
             }
             else
@@ -138,9 +138,9 @@
               this.chain(window,'hide-end');
             } 
             
-            var pos = Math.abs( parseInt( (offset.y/25)-10) ); // to parallax, you need to come up with a variable background position
+            var pos = Math.abs( parseInt( (offset.y/25)-10) ); // To parallax, you need to come up with a variable background position
             
-            args['background-position'] = [ '0 -'+pos+'px' ];            
+            args['background-position'] = [ '0 -'+pos+'px' ]; // This bg position will be applied to the alt_target      
             
             return [ type, options, args, alt_target, evt ];            
           }          
